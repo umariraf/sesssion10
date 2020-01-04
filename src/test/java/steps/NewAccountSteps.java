@@ -1,5 +1,7 @@
 package steps;
 
+import java.util.Random;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -10,6 +12,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import junit.framework.Assert;
 import page.LoginPage;
+import page.NewAccountPage;
 import page.SideNavigation;
 import util.BrowserFactory;
 
@@ -17,12 +20,14 @@ public class NewAccountSteps {
 	WebDriver driver;
 	LoginPage loginPage;
 	SideNavigation sideNavigation;
+	NewAccountPage newAccountPage;
 	
 	@Before
 	public void startFirst() {
 		driver = BrowserFactory.startBrowser();
 		loginPage = PageFactory.initElements(driver, LoginPage.class);
 		sideNavigation = PageFactory.initElements(driver, SideNavigation.class);
+		newAccountPage = PageFactory.initElements(driver, NewAccountPage.class);
 	}
 	
 	@Given("^a user with username \"([^\"]*)\" and password \"([^\"]*)\"$")
@@ -37,7 +42,17 @@ public class NewAccountSteps {
 	
 	@Then("^New Account page should display$")
 	public void new_Account_page_should_display() {
-	    Assert.assertTrue("Page did not display", false);
+		Assert.assertTrue("Page not found", newAccountPage.isPanelHeaderDisplayed());
+	}
+	
+	@When("^user creates a new account using title \"([^\"]*)\" Description \"([^\"]*)\" Amount \"([^\"]*)\"$")
+	public void user_creates_a_new_account_using_title_Description_Amount(String title, String description, String amount) throws InterruptedException {
+		Thread.sleep(1000);
+		newAccountPage.inputAccountTitle(title + new Random().nextInt(999));
+		newAccountPage.inputDescription(description);
+		newAccountPage.inputAmount(amount);
+		newAccountPage.clickOnSubmitButton();
+		Thread.sleep(3000);
 	}
 	
 	@After
