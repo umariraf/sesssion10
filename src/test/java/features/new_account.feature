@@ -15,4 +15,4 @@ Scenario Outline: C235 - Create a new account
 		|username					|password|title   |description|amount|
 		|techfiosdemo@gmail.com		|abc123  |Calzone |two topping|  10  |
 		|techfiosdemo@gmail.com		|abc123  |Sandwich|Beef       | 5    |
-		
+		|techfiosdemo@gmail.com		|abc123  |noodles |Beef       | 5    |
