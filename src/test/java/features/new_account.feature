@@ -5,3 +5,4 @@ Feature: New Account Page
 Scenario: Add new account
 Given a user with username "techfiosdemo@gmail.com" and password "abc123"
 When user navigates to New Account Page
+Then New Account page should display
